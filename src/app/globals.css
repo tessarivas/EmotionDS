@@ -1,8 +1,24 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'NATS';
+  src: url('../fonts/NATS-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Passion One';
+  src: url('../fonts/PassionOne-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --font-nats: 'NATS', Arial, Helvetica, sans-serif;
+  --font-passion: 'Passion One', Arial, Helvetica, sans-serif;
 }
 
 @theme inline {
@@ -10,6 +26,8 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-nats: var(--font-nats);
+  --font-passion: var(--font-passion);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -23,4 +41,8 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
 }

@@ -18,7 +18,7 @@ export default function FootSection() {
           © 2024 Emotion-DS | Proyecto de Cómputo Bioinspirado
         </p>
         <p className="text-xs">
-          Desarrollado con 💙 para crear un mundo más inclusivo
+          Desarrollado con el 💙 para crear un mundo más inclusivo
         </p>
       </div>
     </section>

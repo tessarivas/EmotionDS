@@ -5,6 +5,8 @@ import { ImageIcon } from 'lucide-react';
 export default function ImageUpload() {
   const [dragActive, setDragActive] = useState(false);
   const [uploadedImage, setUploadedImage] = useState(null);
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
+
   const inputRef = useRef(null);
 
   const handleDrag = (e) => {
@@ -46,6 +48,17 @@ export default function ImageUpload() {
     }
   };
 
+  const handleAnalyze = () => {
+    setIsAnalyzing(true);
+    // Aquí irá la llamada a la API
+    // Simulamos el análisis por ahora
+    setTimeout(() => {
+      setIsAnalyzing(false);
+      // Aquí se abriría el modal con los resultados
+      console.log('Análisis completado');
+    }, 2000);
+  };
+
   const openFileDialog = () => {
     inputRef.current?.click();
   };
@@ -66,14 +79,38 @@ export default function ImageUpload() {
             <img 
               src={uploadedImage} 
               alt="Imagen subida" 
-              className="max-w-full max-h-64 object-contain rounded-xl mb-4"
+              className="max-w-full max-h-48 object-contain rounded-xl mb-4"
             />
-            <button
-              onClick={() => setUploadedImage(null)}
-              className="bg-red-500 hover:bg-red-600 text-white text-2xl px-4 py-2 rounded-3xl transition-colors duration-200 cursor-pointer"
-            >
-              ELIMINAR IMAGEN
-            </button>
+            
+            {/* Botones de acción */}
+            <div className="space-y-3 w-full flex flex-col items-center">
+              <button
+                onClick={handleAnalyze}
+                disabled={isAnalyzing}
+                className={`w-50 text-white text-xl py-2 px-6 rounded-lg transition-all duration-200 cursor-pointer ${
+                  isAnalyzing 
+                    ? 'bg-gray-400 cursor-not-allowed' 
+                    : 'bg-green-500 hover:bg-green-600 shadow-md shadow-green-400'
+                }`}
+              >
+                {isAnalyzing ? 'ANALIZANDO...' : 'ANALIZAR IMAGEN'}
+              </button>
+              
+              <button
+                onClick={() => {
+                  setUploadedImage(null);
+                  setIsAnalyzing(false);
+                }}
+                disabled={isAnalyzing}
+                className={`w-50 text-white text-xl py-2 px-4 rounded-lg transition-colors duration-200 ${
+                  isAnalyzing 
+                    ? 'bg-gray-300 cursor-not-allowed' 
+                    : 'bg-red-500 hover:bg-red-600 shadow-md shadow-red-400 cursor-pointer'
+                }`}
+              >
+                ELIMINAR IMAGEN
+              </button>
+            </div>
           </div>
         ) : (
           <>

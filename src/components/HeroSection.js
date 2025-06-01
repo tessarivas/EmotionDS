@@ -12,7 +12,6 @@ export default function HeroSection() {
         backgroundImage: 'url("/Hero.png")',
       }}
     >
-      {/* Logo en esquina superior derecha */}
       <div className="absolute top-15 left-8 z-10">
         <Image
           src="/LOGO.svg"

@@ -1,13 +1,17 @@
 'use client'
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { ImageIcon } from 'lucide-react';
+import usePredict from '@/hooks/usePredict';
 
-export default function ImageUpload() {
+export default function ImageUpload({ onEmotionDetected }) {
   const [dragActive, setDragActive] = useState(false);
   const [uploadedImage, setUploadedImage] = useState(null);
-  const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [selectedFile, setSelectedFile] = useState(null);
+  
+  const { isLoading: isAnalyzing, error, result, predict, reset } = usePredict();
 
   const inputRef = useRef(null);
+  const processedResultRef = useRef(null);
 
   const handleDrag = (e) => {
     e.preventDefault();
@@ -38,6 +42,7 @@ export default function ImageUpload() {
 
   const handleFile = (file) => {
     if (file.type.startsWith('image/')) {
+      setSelectedFile(file);
       const reader = new FileReader();
       reader.onload = (e) => {
         setUploadedImage(e.target.result);
@@ -48,15 +53,36 @@ export default function ImageUpload() {
     }
   };
 
-  const handleAnalyze = () => {
-    setIsAnalyzing(true);
-    // Aquí irá la llamada a la API
-    // Simulamos el análisis por ahora
-    setTimeout(() => {
-      setIsAnalyzing(false);
-      // Aquí se abriría el modal con los resultados
-      console.log('Análisis completado');
-    }, 2000);
+  // Handle result changes
+  useEffect(() => {
+    if (result && result !== processedResultRef.current) {
+      processedResultRef.current = result;
+      console.log('Análisis completado:', result);
+      // Map English emotion names to Spanish
+      const emotionMap = {
+        'happiness': 'FELICIDAD',
+        'sadness': 'TRISTEZA',
+        'surprise': 'SORPRESA'
+      };
+      const spanishEmotion = emotionMap[result.predicted_emotion];
+      const confidencePercentage = Math.round(result.confidence * 100);
+      if (spanishEmotion && onEmotionDetected) {
+        onEmotionDetected(spanishEmotion, confidencePercentage);
+      }
+    }
+  }, [result]);
+
+  // Handle error changes
+  useEffect(() => {
+    if (error) {
+      console.error('Error en análisis:', error);
+    }
+  }, [error]);
+
+  const handleAnalyze = async () => {
+    if (selectedFile) {
+      await predict(selectedFile);
+    }
   };
 
   const openFileDialog = () => {
@@ -99,7 +125,9 @@ export default function ImageUpload() {
               <button
                 onClick={() => {
                   setUploadedImage(null);
-                  setIsAnalyzing(false);
+                  setSelectedFile(null);
+                  reset(); // Clear any previous results
+                  processedResultRef.current = null; // Reset processed result
                 }}
                 disabled={isAnalyzing}
                 className={`w-50 text-white text-xl py-2 px-4 rounded-lg transition-colors duration-200 ${

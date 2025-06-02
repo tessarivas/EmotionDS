@@ -28,7 +28,7 @@ const emotionConfig = {
   }
 };
 
-export default function ResultModal({ isOpen, onClose, emotion }) {
+export default function ResultModal({ isOpen, onClose, emotion, confidence }) {
   if (!isOpen || !emotion) return null;
 
   const config = emotionConfig[emotion];
@@ -84,6 +84,16 @@ export default function ResultModal({ isOpen, onClose, emotion }) {
               <h1 className={`text-5xl font-bold ${config.textColor} mb-4`}>
                 {emotion}
               </h1>
+              
+              {/* Mostrar confianza si está disponible */}
+              {confidence && (
+                <div className="mb-4">
+                  <p className="text-lg text-gray-600 mb-2">Nivel de confianza:</p>
+                  <p className={`text-3xl font-bold ${config.textColor}`}>
+                    {confidence}%
+                  </p>
+                </div>
+              )}
               
               {/* Descripción */}
               <p className="text-2xl text-gray-600">

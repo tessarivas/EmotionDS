@@ -1,15 +1,20 @@
 "use client";
 import { X, Info } from "lucide-react";
 
-export default function DisclaimerModal({ isOpen, onClose }) {
+export default function DisclaimerModal({ isOpen, onClose, onAccept }) {
   if (!isOpen) return null;
+
+  const handleAccept = () => {
+    if (onAccept) {
+      onAccept();
+    } else {
+      onClose();
+    }
+  };
 
   return (
     <>
-      <div
-        className="fixed inset-0 bg-black/50 backdrop-blur-sm z-30 transition-all duration-300"
-        onClick={onClose}
-      />
+      <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-30 transition-all duration-300" />
       <div className="fixed inset-0 flex items-center justify-center z-40 p-4 font-nats">
         <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[80vh] overflow-y-auto transform transition-all duration-300 scale-100">
           <div className="flex justify-between items-center p-6 border-b border-gray-200">
@@ -21,12 +26,6 @@ export default function DisclaimerModal({ isOpen, onClose }) {
                 Aviso Importante
               </h2>
             </div>
-            <button
-              onClick={onClose}
-              className="p-2 hover:bg-gray-100 rounded-full transition-colors duration-200"
-            >
-              <X size={24} className="text-gray-600" />
-            </button>
           </div>
 
           <div className="p-6 space-y-6">
@@ -35,8 +34,8 @@ export default function DisclaimerModal({ isOpen, onClose }) {
                 Propósito Educativo
               </h3>
               <p className="text-blue-700 text-xl">
-                Este proyecto fue desarrollado con fines educativos como parte
-                de una asignación escolar. El objetivo es explorar cómo la
+                Este proyecto fue desarrollado con fines educativos como parte de
+                una asignación escolar. El objetivo es explorar cómo la
                 tecnología puede reconocer emociones humanas a través de
                 expresiones faciales, incluyendo en personas con síndrome de
                 Down.
@@ -67,15 +66,11 @@ export default function DisclaimerModal({ isOpen, onClose }) {
                 </li>
                 <li className="flex items-start space-x-2">
                   <span className="w-2 h-2 bg-yellow-500 rounded-full mt-2 flex-shrink-0"></span>
-                  <span>
-                    Los resultados pueden no ser completamente precisos
-                  </span>
+                  <span>Los resultados pueden no ser completamente precisos</span>
                 </li>
                 <li className="flex items-start space-x-2">
                   <span className="w-2 h-2 bg-yellow-500 rounded-full mt-2 flex-shrink-0"></span>
-                  <span>
-                    No debe usarse para diagnósticos o evaluaciones médicas
-                  </span>
+                  <span>No debe usarse para diagnósticos o evaluaciones médicas</span>
                 </li>
                 <li className="flex items-start space-x-2">
                   <span className="w-2 h-2 bg-yellow-500 rounded-full mt-2 flex-shrink-0"></span>
@@ -90,7 +85,7 @@ export default function DisclaimerModal({ isOpen, onClose }) {
 
           <div className="border-t border-gray-200 p-6">
             <button
-              onClick={onClose}
+              onClick={handleAccept}
               className="w-full bg-blue-500 hover:bg-blue-600 text-white text-2xl py-3 px-6 rounded-lg transition-colors duration-200 cursor-pointer"
             >
               ENTIENDO Y ACEPTO

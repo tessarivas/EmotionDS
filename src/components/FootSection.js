@@ -29,7 +29,7 @@ export default function FootSection() {
         <div className="fixed bottom-8 right-8 z-20">
           <button
             onClick={() => setIsDisclaimerModalOpen(true)}
-            className="group bg-cyan-500 hover:bg-cyan-600 text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer"
+            className="group bg-red-500 hover:bg-red-600 text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer"
           >
             <Info
               size={24}

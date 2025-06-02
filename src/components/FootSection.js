@@ -22,8 +22,14 @@ export default function FootSection() {
           <p className="text-sm mb-2">
             © 2025 Emotion-DS | Proyecto de Cómputo Bioinspirado
           </p>
-          <p className="text-xs">
+          <p className="text-xs mb-2">
             Desarrollado con el 💙 para crear un mundo más inclusivo
+          </p>
+        </div>
+
+        <div className="absolute bottom-0 left-0 right-0 p-4 text-center">
+          <p className="text-xs text-cyan-900">
+            Brayan Ivan Perez Ventura, Antonio Ramos Gonzalez, Andrea y Teresa Rivas Gómez
           </p>
         </div>
         <div className="fixed bottom-8 right-8 z-20">

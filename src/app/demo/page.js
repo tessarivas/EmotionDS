@@ -19,12 +19,6 @@ export default function DemoPage() {
     checkApiHealth();
   }, []);
 
-  const handleEmotionClick = (emotion) => {
-    setDetectedEmotion(emotion);
-    setConfidence(null); // No confidence for manual clicks
-    setIsResultModalOpen(true);
-  };
-
   const handleEmotionDetected = useCallback((emotion, confidencePercentage) => {
     setDetectedEmotion(emotion);
     setConfidence(confidencePercentage);
@@ -100,24 +94,15 @@ export default function DemoPage() {
         </h2>
 
         <div className="flex flex-wrap justify-center gap-10 font-nats text-2xl">
-          <button 
-            onClick={() => handleEmotionClick('FELICIDAD')}
-            className="bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-6 rounded-lg shadow-yellow-600 shadow-md cursor-pointer transition-all duration-200"
-          >
+          <div className="bg-yellow-500 text-white py-2 px-6 rounded-lg shadow-yellow-600 shadow-md">
             FELICIDAD
-          </button>
-          <button 
-            onClick={() => handleEmotionClick('TRISTEZA')}
-            className="bg-cyan-500 hover:bg-cyan-600 text-white py-2 px-6 rounded-lg shadow-cyan-600 shadow-md cursor-pointer transition-all duration-200"
-          >
+          </div>
+          <div className="bg-cyan-500 text-white py-2 px-6 rounded-lg shadow-cyan-600 shadow-md">
             TRISTEZA
-          </button>
-          <button 
-            onClick={() => handleEmotionClick('SORPRESA')}
-            className="bg-orange-500 hover:bg-orange-600 text-white py-2 px-6 rounded-lg shadow-orange-600 shadow-md cursor-pointer transition-all duration-200"
-          >
+          </div>
+          <div className="bg-orange-500 text-white py-2 px-6 rounded-lg shadow-orange-600 shadow-md">
             SORPRESA
-          </button>
+          </div>
         </div>
 
         <div className="fixed bottom-8 right-8 z-20">

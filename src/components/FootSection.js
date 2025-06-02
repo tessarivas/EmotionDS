@@ -15,12 +15,14 @@ export default function FootSection() {
       {/* Footer final */}
       <div className="text-center text-cyan-700">
         <p className="text-sm mb-2">
-          © 2024 Emotion-DS | Proyecto de Cómputo Bioinspirado
+          © 2025 Emotion-DS | Proyecto de Cómputo Bioinspirado
         </p>
         <p className="text-xs">
           Desarrollado con el 💙 para crear un mundo más inclusivo
         </p>
       </div>
+
+      
     </section>
   );
 }
